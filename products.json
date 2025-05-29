@@ -1,0 +1,322 @@
+[
+    {
+        "id_product": "SP01",
+        "name_product": "Điện thoại Samsung Galaxy A06 5G (4GB/64GB)",
+        "cost": 2270000,
+        "description": "Đã kích hoạt bảo hành điện tử - Hàng chính hãng",
+        "quantity": 50,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP02",
+        "name_product": "Điện thoại Vivo Y19s (4GB/128GB)",
+        "cost": 3090000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP04",
+        "name_product": "Máy Tính Bảng Galaxy Tab S10 FE Wifi (8GB/128GB)",
+        "cost": 10890000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Máy Tính"
+    },
+    {
+        "id_product": "SP05",
+        "name_product": "Điện Thoại Samsung Galaxy A06",
+        "cost": 1990000,
+        "description": "Đã kích hoạt bảo hành điện tử - Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP06",
+        "name_product": "Máy tính bảng iPad Gen 11 (A16) WiFi",
+        "cost": 10650000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Máy tính"
+    },
+    {
+        "id_product": "SP07",
+        "name_product": "Củ Sạc Samsung Không Kèm Cáp 25W",
+        "cost": 160000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 0,
+        "catalogue": "Củ Sạc"
+    },
+    {
+        "id_product": "SP08",
+        "name_product": "Apple iPhone 16e",
+        "cost": 16990000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Apple iPhone"
+    },
+    {
+        "id_product": "SP09",
+        "name_product": "Điện thoại Xiaomi Redmi Note 14 6GB/128GB",
+        "cost": 4990000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP10",
+        "name_product": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds FE R400N",
+        "cost": 950000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Tai nghe"
+    },
+    {
+        "id_product": "SP11",
+        "name_product": "Điện Thoại Samsung A16 5G 8GB/128GB",
+        "cost": 5019000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP12",
+        "name_product": "Điện Thoại Samsung Galaxy A16 LTE (4GB/128GB)",
+        "cost": 3170000,
+        "description": "Đã kích hoạt bảo hành điện tử - Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP13",
+        "name_product": "Điện thoại POCO C75 (8GB/256GB)",
+        "cost": 2890000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP14",
+        "name_product": "Điện thoại POCO C75 (6GB/128GB)",
+        "cost": 2490000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP15",
+        "name_product": "Máy đọc sách Amazon Kindle Paperwhite 6 (Gen 12th), Mới nguyên Seal",
+        "cost": 4860000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Máy đọc"
+    },
+    {
+        "id_product": "SP16",
+        "name_product": "Điện thoại OPPO A79 5G (4GB/128GB) Màn hình 6.7\", Sạc nhanh 33W , Rom tiếng việt",
+        "cost": 3199000,
+        "description": "Bản nội địa Nhật - Hàng nhập khẩu",
+        "quantity": 80,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP17",
+        "name_product": "Điện Thoại Samsung Galaxy A06 (4GB/128GB) Đã kích hoạt bảo hành điện tử",
+        "cost": 2250000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP18",
+        "name_product": "Điện thoại Tecno SPARK GO 1 ( 4GB",
+        "cost": 1890000,
+        "description": "64GB) - Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP19",
+        "name_product": "Máy đọc sách Boox Go 6",
+        "cost": 4090000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Máy đọc"
+    },
+    {
+        "id_product": "SP20",
+        "name_product": "Apple iPhone 16",
+        "cost": 18990000,
+        "description": "Xanh Mòng Két - 128GB",
+        "quantity": 100,
+        "catalogue": "Apple iPhone"
+    },
+    {
+        "id_product": "SP21",
+        "name_product": "Apple iPhone 16 Pro",
+        "cost": 24750000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Apple iPhone"
+    },
+    {
+        "id_product": "SP22",
+        "name_product": "Apple iPhone 16 Pro Max",
+        "cost": 30250000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Apple iPhone"
+    },
+    {
+        "id_product": "SP23",
+        "name_product": "Điện thoại OPPO A79 5G (8GB/256GB)",
+        "cost": 5490000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP24",
+        "name_product": "Điện Thoại Samsung A35 5G 8GB/128GB",
+        "cost": 6579000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP25",
+        "name_product": "Máy Tính Bảng Samsung Galaxy Tab A9 Plus Wifi 4GB/64GB",
+        "cost": 3590000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Máy Tính"
+    },
+    {
+        "id_product": "SP26",
+        "name_product": "Máy Tính Bảng Samsung Galaxy Tab A9 Wifi 4GB/64GB",
+        "cost": 2490000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Máy Tính"
+    },
+    {
+        "id_product": "SP27",
+        "name_product": "Điện thoại AI Samsung Galaxy S24 Ultra 12GB/512GB, Camera 200MP Zoom 100x, S Pen- Tím- Hàng Chính Hãng",
+        "cost": 21990000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP28",
+        "name_product": "Điện thoại Xiaomi Redmi Note 13 (6GB/128GB)",
+        "cost": 3390000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP29",
+        "name_product": "Điện Thoại Oppo A18 (4GB/128GB)",
+        "cost": 2590000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP30",
+        "name_product": "iPhone 15 Plus",
+        "cost": 18950000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "iPhone 15"
+    },
+    {
+        "id_product": "SP31",
+        "name_product": "iPhone 15",
+        "cost": 15450000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "iPhone 15"
+    },
+    {
+        "id_product": "SP32",
+        "name_product": "Điện Thoại Oppo A58 6GB/128GB",
+        "cost": 4090000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Điện Thoại"
+    },
+    {
+        "id_product": "SP33",
+        "name_product": "Combo Máy đọc sách All New Kindle Paperwhite 5 (11th Gen) và Bao da",
+        "cost": 3820000,
+        "description": "Hàng nhập khẩu",
+        "quantity": 100,
+        "catalogue": "Combo Máy"
+    },
+    {
+        "id_product": "SP34",
+        "name_product": "Adapter Sạc Anker 313 / 311 Charger Gen 2 30W 1 Cổng Type-C A2639",
+        "cost": 229000,
+        "description": "Hàng Chính Hãng",
+        "quantity": 100,
+        "catalogue": "Adapter Sạc"
+    },
+    {
+        "id_product": "SP35",
+        "name_product": "Combo máy đọc sách Kindle Paperwhite 5 (11th gen) tặng kèm bao da ( Cover )",
+        "cost": 3590000,
+        "description": "Hàng nhập khẩu",
+        "quantity": 100,
+        "catalogue": "Combo máy"
+    },
+    {
+        "id_product": "SP36",
+        "name_product": "Apple iPhone 14",
+        "cost": 12750000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Apple iPhone"
+    },
+    {
+        "id_product": "SP37",
+        "name_product": "Apple iPhone 13",
+        "cost": 11490000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Apple iPhone"
+    },
+    {
+        "id_product": "SP38",
+        "name_product": "Apple iPad 10.2-inch ( 9th Gen) Wi-Fi 2021",
+        "cost": 6850000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Apple iPad"
+    },
+    {
+        "id_product": "SP39",
+        "name_product": "Điện thoại bàn Ktel 645 hàng chính hãng",
+        "cost": 450000,
+        "description": "Hàng chính hãng",
+        "quantity": 100,
+        "catalogue": "Điện thoại"
+    },
+    {
+        "id_product": "SP40",
+        "name_product": "Máy đọc sách All New Kindle Paperwhite 5 (11th Gen)",
+        "cost": 3820000,
+        "description": "Hàng nhập khẩu",
+        "quantity": 100,
+        "catalogue": "Máy đọc"
+    },
+    {
+        "id_product": "SP41",
+        "name_product": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds FE R400N",
+        "cost": 950000,
+        "description": "Hàng chính hãng",
+        "quantity": 200,
+        "catalogue": "Tai nghe"
+    }
+]
