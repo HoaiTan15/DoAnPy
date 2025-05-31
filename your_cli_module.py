@@ -3,14 +3,12 @@ from ClassFile import File
 from ClassProduct import Product
 
 def main_cli():
-    """
-    CLI cho phép đăng nhập, đăng ký, quên mật khẩu, phân quyền admin/user.
-    Sau khi đăng nhập, admin có thể quản lý sản phẩm, user có thể mua hàng.
-    """
+    # CLI cho phép đăng nhập, đăng ký, quên mật khẩu, phân quyền admin/user
     user_manager = UserManager("users.json")
     file_manager = File("products.json")
 
     def admin_menu():
+        # Menu cho admin: quản lý sản phẩm
         while True:
             print("\n==== ADMIN MENU ====")
             print("1. Xem danh sách sản phẩm")
@@ -54,6 +52,7 @@ def main_cli():
                 print("Lựa chọn không hợp lệ.")
 
     def user_menu():
+        # Menu cho user: mua hàng, xem giỏ, thanh toán
         cart = []
         while True:
             print("\n==== USER MENU ====")
@@ -80,7 +79,6 @@ def main_cli():
                 if quantity <= 0 or quantity > sp.quantity:
                     print(f"Số lượng không hợp lệ! Hiện còn {sp.quantity}")
                     continue
-                # Kiểm tra nếu đã có trong giỏ thì cộng dồn
                 for item in cart:
                     if item["id"] == id_product:
                         item["quantity"] += quantity
@@ -121,6 +119,7 @@ def main_cli():
                 print("Lựa chọn không hợp lệ.")
 
     def forgot_password():
+        # Đặt lại mật khẩu cho tài khoản
         username = input("Nhập tài khoản cần đặt lại mật khẩu: ").strip()
         user = user_manager.get_user(username)
         if not user:
@@ -134,6 +133,7 @@ def main_cli():
         user_manager.save_users()
         print("Đã cập nhật mật khẩu mới.")
 
+    # Vòng lặp chính CLI: đăng nhập, đăng ký, quên mật khẩu
     while True:
         print("\n==== ĐĂNG NHẬP HỆ THỐNG ====")
         print("1. Đăng nhập")

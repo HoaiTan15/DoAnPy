@@ -80,10 +80,7 @@ class AdminGUI:
         self.load_products()
 
     def load_products(self):
-        """
-        Load toàn bộ sản phẩm từ file và hiển thị lên bảng.
-        Đồng thời xóa trắng các ô nhập liệu.
-        """
+        # Hiển thị danh sách sản phẩm lên bảng
         for i in self.tree.get_children():
             self.tree.delete(i)
         for sp in self.file_manager.products:
@@ -95,23 +92,17 @@ class AdminGUI:
                 sp.quantity,
                 sp.catalogue
             ))
-        # Xóa form nhập
         for entry in self.entries.values():
             entry.delete(0, tk.END)
 
     def add_product(self):
-        """
-        Thêm sản phẩm mới vào file từ dữ liệu nhập trên form.
-        Kiểm tra trùng ID trước khi thêm.
-        """
+        # Thêm sản phẩm mới từ form vào file
         data = self.get_entry_data()
         if not data:
-            return  # Dừng lại nếu có lỗi nhập liệu
-
+            return
         if self.file_manager.find_product_by_id(data['new_id']):
             messagebox.showwarning("Lỗi", "ID đã tồn tại!")
             return
-
         sp = Product(
             data["new_id"],
             data["new_name"],
@@ -125,9 +116,7 @@ class AdminGUI:
         messagebox.showinfo("Thành công", "Đã thêm sản phẩm!")
 
     def delete_product(self):
-        """
-        Xóa sản phẩm được chọn trên bảng khỏi file.
-        """
+        # Xóa sản phẩm được chọn khỏi file
         selected = self.tree.focus()
         if not selected:
             messagebox.showwarning("Chưa chọn", "Vui lòng chọn sản phẩm để xóa!")
@@ -138,9 +127,7 @@ class AdminGUI:
         messagebox.showinfo("Thành công", "Đã xóa sản phẩm!")
 
     def update_product(self):
-        """
-        Cập nhật thông tin sản phẩm được chọn trên bảng với dữ liệu mới từ form.
-        """
+        # Cập nhật sản phẩm được chọn bằng dữ liệu mới từ form
         selected = self.tree.focus()
         if not selected:
             messagebox.showwarning("Chưa chọn", "Vui lòng chọn sản phẩm để cập nhật!")
@@ -153,10 +140,7 @@ class AdminGUI:
         messagebox.showinfo("Thành công", "Đã cập nhật sản phẩm!")
 
     def get_entry_data(self):
-        """
-        Lấy dữ liệu từ các ô nhập liệu trên form.
-        Trả về dict chứa thông tin sản phẩm, hoặc None nếu nhập sai.
-        """
+        # Lấy dữ liệu từ form, trả về dict hoặc None nếu nhập sai
         try:
             return {
                 "new_id": self.entries["id"].get().strip(),
@@ -171,6 +155,7 @@ class AdminGUI:
             return None
 
     def on_tree_select(self, event):
+        # Đổ dữ liệu sản phẩm được chọn lên form
         selected = self.tree.focus()
         if not selected:
             return

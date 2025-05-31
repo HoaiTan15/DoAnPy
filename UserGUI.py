@@ -3,9 +3,7 @@ import tkinter as tk
 from ClassFile import File
 
 def setup_style():
-    """
-    Thiết lập style cho các widget giao diện (Treeview, Button, ...).
-    """
+    # Thiết lập style cho các widget giao diện
     style = ttk.Style()
     style.theme_use('clam')
     style.configure("Treeview",
@@ -24,9 +22,7 @@ def setup_style():
 
 class UserGUI:
     def __init__(self, root):
-        """
-        Khởi tạo giao diện người dùng để xem, mua, thêm vào giỏ, thanh toán sản phẩm.
-        """
+        # Khởi tạo giao diện người dùng, hiển thị sản phẩm và các chức năng mua hàng
         setup_style()
         self.root = root
         self.root.title("Danh sách sản phẩm (User)")
@@ -35,15 +31,12 @@ class UserGUI:
         self.file_manager = File("products.json")
         self.cart = []  # Danh sách các sản phẩm trong giỏ hàng
 
-        # Main frame nền trắng bo góc
         main_frame = tk.Frame(self.root, bg="white", bd=2, relief="groove")
         main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 
-        # Tiêu đề
         tk.Label(main_frame, text="DANH SÁCH SẢN PHẨM", font=("Segoe UI", 16, "bold"),
                  bg="white", fg="#1976d2").pack(pady=(18, 8))
 
-        # Treeview (bảng sản phẩm)
         columns = ("id", "name", "cost", "description", "quantity", "catalogue")
         self.tree = ttk.Treeview(main_frame, columns=columns, show="headings", height=10)
         for col in columns:
@@ -51,7 +44,6 @@ class UserGUI:
             self.tree.column(col, width=120)
         self.tree.pack(fill=tk.BOTH, expand=True, padx=20, pady=8)
 
-        # Khung nhập số lượng và các nút chức năng
         action_frame = tk.Frame(main_frame, bg="white")
         action_frame.pack(fill=tk.X, pady=10)
 
@@ -59,7 +51,6 @@ class UserGUI:
         self.quantity_var = tk.IntVar(value=1)
         tk.Entry(action_frame, textvariable=self.quantity_var, width=5, font=("Segoe UI", 11)).grid(row=0, column=1, padx=5)
 
-        # Căn giữa các nút
         btn_frame = tk.Frame(action_frame, bg="white")
         btn_frame.grid(row=0, column=2, padx=10, sticky="ew")
         action_frame.grid_columnconfigure(2, weight=1)
@@ -71,9 +62,7 @@ class UserGUI:
         self.load_products()
 
     def load_products(self):
-        """
-        Đọc danh sách sản phẩm từ file và hiển thị lên bảng Treeview.
-        """
+        # Đọc sản phẩm từ file và hiển thị lên bảng
         for sp in self.file_manager.products:
             self.tree.insert('', tk.END, values=(
                 sp.id_product,
@@ -85,10 +74,7 @@ class UserGUI:
             ))
             
     def buy_product(self):
-        """
-        (Không sử dụng trong giao diện này)
-        Hiển thị hóa đơn cho sản phẩm được chọn với số lượng nhập vào.
-        """
+        # Hiển thị hóa đơn cho sản phẩm được chọn (không dùng trong giao diện này)
         selected = self.tree.selection()
         if not selected:
             tk.messagebox.showwarning("Chưa chọn sản phẩm", "Vui lòng chọn sản phẩm muốn mua!")
@@ -115,10 +101,7 @@ class UserGUI:
         tk.messagebox.showinfo("Hóa đơn", bill)
 
     def add_to_cart(self):
-        """
-        Thêm sản phẩm được chọn vào giỏ hàng với số lượng nhập vào.
-        Nếu sản phẩm đã có trong giỏ thì cộng dồn số lượng.
-        """
+        # Thêm sản phẩm vào giỏ hàng, cộng dồn số lượng nếu đã có
         selected = self.tree.selection()
         if not selected:
             tk.messagebox.showwarning("Chưa chọn sản phẩm", "Vui lòng chọn sản phẩm muốn mua!")
@@ -142,7 +125,6 @@ class UserGUI:
             tk.messagebox.showwarning("Không đủ hàng", f"Chỉ còn {available} sản phẩm!")
             return
 
-        # Kiểm tra nếu sản phẩm đã có trong giỏ thì cộng dồn số lượng
         for cart_item in self.cart:
             if cart_item["id"] == product_id:
                 cart_item["quantity"] += quantity
@@ -157,12 +139,7 @@ class UserGUI:
         tk.messagebox.showinfo("Thành công", f"Đã thêm {quantity} {name} vào giỏ hàng!")
 
     def checkout(self):
-        """
-        Thanh toán toàn bộ sản phẩm trong giỏ hàng:
-        - Hiển thị hóa đơn tổng.
-        - Trừ số lượng sản phẩm trong kho.
-        - Lưu lại file và làm mới bảng.
-        """
+        # Thanh toán toàn bộ sản phẩm trong giỏ, trừ số lượng và lưu file
         if not self.cart:
             tk.messagebox.showwarning("Giỏ hàng trống", "Bạn chưa chọn sản phẩm nào!")
             return
@@ -173,7 +150,6 @@ class UserGUI:
             line_total = item["price"] * item["quantity"]
             bill += f"{item['name']} x {item['quantity']} = {line_total:,} VNĐ\n"
             total += line_total
-            # Trừ số lượng sản phẩm trong file_manager
             for sp in self.file_manager.products:
                 if sp.id_product == item["id"]:
                     sp.quantity -= item["quantity"]
@@ -184,16 +160,13 @@ class UserGUI:
         bill += f"TỔNG CỘNG: {total:,} VNĐ\n"
         tk.messagebox.showinfo("Hóa đơn", bill)
 
-        # Lưu lại số lượng mới vào file
         self.file_manager.save_data()
         self.cart.clear()
         self.tree.delete(*self.tree.get_children())
         self.load_products()
 
     def view_cart(self):
-        """
-        Hiển thị thông tin các sản phẩm trong giỏ hàng và tổng tiền.
-        """
+        # Hiển thị thông tin các sản phẩm trong giỏ hàng và tổng tiền
         if not self.cart:
             tk.messagebox.showinfo("Giỏ hàng", "Giỏ hàng của bạn đang trống!")
             return

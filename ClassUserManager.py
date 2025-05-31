@@ -2,26 +2,15 @@ from ClassUser import User
 import json
 
 class UserManager:
-    """
-    Lớp UserManager quản lý danh sách người dùng, cho phép thêm, xóa, tìm kiếm,
-    xác thực đăng nhập và lưu/đọc dữ liệu người dùng từ file JSON.
-    """
+    # Quản lý danh sách user, thêm/xóa/tìm kiếm/xác thực và lưu/đọc file
 
     def __init__(self, filename):
-        """
-        Khởi tạo UserManager với tên file dữ liệu.
-        Args:
-            filename (str): Đường dẫn file JSON lưu thông tin người dùng.
-        """
+        # Khởi tạo với tên file và load user
         self.filename = filename
         self.users = self.load_users()
     
     def load_users(self):
-        """
-        Đọc danh sách người dùng từ file JSON.
-        Returns:
-            list: Danh sách các đối tượng User.
-        """
+        # Đọc danh sách user từ file JSON
         try:
             with open(self.filename, "r", encoding="utf8") as file:
                 data = json.load(file)
@@ -30,20 +19,12 @@ class UserManager:
             return []
     
     def save_users(self):
-        """
-        Ghi danh sách người dùng hiện tại vào file JSON.
-        """
+        # Ghi danh sách user vào file JSON
         with open(self.filename, "w", encoding="utf8") as file:
             json.dump([u.convert_to_dict() for u in self.users], file)
             
     def new_user(self, username, password, role):
-        """
-        Thêm người dùng mới vào hệ thống.
-        Args:
-            username (str): Tên đăng nhập.
-            password (str): Mật khẩu.
-            role (str): Vai trò (user/admin).
-        """
+        # Thêm user mới
         for user in self.users:
             if user.username == username:
                 print("Tài khoản đã tồn tại!")
@@ -55,36 +36,19 @@ class UserManager:
         print("Tạo tài khoản thành công!")
         
     def delete_user(self, username):
-        """
-        Xóa người dùng khỏi hệ thống theo tên đăng nhập.
-        Args:
-            username (str): Tên đăng nhập cần xóa.
-        """
+        # Xóa user theo tên đăng nhập
         self.users = [u for u in self.users if u.username != username]
         self.save_users()
 
     def get_user(self, username):
-        """
-        Tìm và trả về đối tượng User theo tên đăng nhập.
-        Args:
-            username (str): Tên đăng nhập cần tìm.
-        Returns:
-            User hoặc None nếu không tìm thấy.
-        """
+        # Tìm user theo tên đăng nhập
         for user in self.users:
             if user.username == username:
                 return user
         return None
 
     def authenticate(self, username, password):
-        """
-        Kiểm tra thông tin đăng nhập.
-        Args:
-            username (str): Tên đăng nhập.
-            password (str): Mật khẩu.
-        Returns:
-            User nếu đăng nhập đúng, None nếu sai.
-        """
+        # Kiểm tra đăng nhập
         for user in self.users:
             if user.username == username and user.password == password:
                 return user 
