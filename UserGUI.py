@@ -1,6 +1,7 @@
 from tkinter import ttk, messagebox
 import tkinter as tk
 from ClassFile import File
+ 
 
 def setup_style():
     # Thiết lập style cho các widget giao diện
@@ -34,6 +35,10 @@ class UserGUI:
         main_frame = tk.Frame(self.root, bg="white", bd=2, relief="groove")
         main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 
+        # Nút Đăng xuất ở góc phải trên của main_frame
+        logout_btn = ttk.Button(main_frame, text="Đăng xuất", command=self.logout_to_login)
+        logout_btn.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)  # Căn phải trên, cách mép 10px
+
         tk.Label(main_frame, text="DANH SÁCH SẢN PHẨM", font=("Segoe UI", 16, "bold"),
                  bg="white", fg="#1976d2").pack(pady=(18, 8))
 
@@ -56,10 +61,19 @@ class UserGUI:
         action_frame.grid_columnconfigure(2, weight=1)
         ttk.Button(btn_frame, text="Thêm vào giỏ", command=self.add_to_cart).pack(side=tk.LEFT, padx=10, ipadx=8)
         ttk.Button(btn_frame, text="Thanh toán", command=self.checkout).pack(side=tk.LEFT, padx=10, ipadx=8)
-        ttk.Button(btn_frame, text="Thoát", command=self.root.quit).pack(side=tk.LEFT, padx=10, ipadx=8)
+        # ttk.Button(btn_frame, text="Thoát", command=self.root.quit).pack(side=tk.LEFT, padx=10, ipadx=8)  # XÓA DÒNG NÀY
         ttk.Button(btn_frame, text="Xem giỏ hàng", command=self.view_cart).pack(side=tk.LEFT, padx=10, ipadx=8)
 
         self.load_products()
+
+    def logout_to_login(self):
+        # Đăng xuất về giao diện đăng nhập
+        self.root.destroy()
+        import tkinter as tk
+        from LoginGUI import LoginApp  # Import ngay trong hàm để tránh vòng lặp import
+        root = tk.Tk()
+        LoginApp(root)
+        root.mainloop()
 
     def load_products(self):
         # Đọc sản phẩm từ file và hiển thị lên bảng

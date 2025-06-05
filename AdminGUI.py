@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from ClassFile import File
 from ClassProduct import Product
+import crawl_tiki  # Thêm dòng này để import hàm crawl_tiki_products
 
 def setup_style():
     style = ttk.Style()
@@ -35,8 +36,22 @@ class AdminGUI:
         main_frame = tk.Frame(self.root, bg="white", bd=2, relief="groove")
         main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
 
-        tk.Label(main_frame, text="QUẢN LÝ SẢN PHẨM", font=("Segoe UI", 16, "bold"),
-                 bg="white", fg="#1976d2").pack(pady=(18, 8))
+        # Frame chứa tiêu đề và nút đăng xuất
+        title_frame = tk.Frame(main_frame, bg="white")
+        title_frame.pack(fill=tk.X, pady=(10, 0))
+
+        title_frame.grid_columnconfigure(0, weight=1)
+        title_label = tk.Label(
+            title_frame,
+            text="QUẢN LÝ SẢN PHẨM",
+            font=("Segoe UI", 16, "bold"),
+            bg="white",
+            fg="#1976d2"
+        )
+        title_label.grid(row=0, column=0, pady=(0, 8), sticky="nsew")
+
+        logout_btn = ttk.Button(title_frame, text="Đăng xuất", command=self.logout_to_login)
+        logout_btn.grid(row=0, column=1, padx=10, pady=5, sticky="e")
 
         # Treeview frame
         tree_frame = tk.Frame(main_frame, bg="white")
@@ -66,16 +81,17 @@ class AdminGUI:
             self.entries[label.lower()] = entry
             form_btn_frame.grid_columnconfigure(i, weight=1)  # Cho phép các cột co giãn đều
 
-        # Căn giữa 4 nút chức năng
+        # Căn giữa 5 nút chức năng (thêm nút Get API)
         btn_frame = tk.Frame(form_btn_frame, bg="white")
         btn_frame.grid(row=2, column=0, columnspan=6, pady=10, sticky="ew")
         for i in range(6):
             btn_frame.grid_columnconfigure(i, weight=1)  # Đảm bảo nút căn giữa khi phóng to
 
-        ttk.Button(btn_frame, text="Thêm", command=self.add_product).grid(row=0, column=1, padx=15, ipadx=10)
-        ttk.Button(btn_frame, text="Xóa", command=self.delete_product).grid(row=0, column=2, padx=15, ipadx=10)
-        ttk.Button(btn_frame, text="Cập nhật", command=self.update_product).grid(row=0, column=3, padx=15, ipadx=10)
-        ttk.Button(btn_frame, text="Làm mới", command=self.load_products).grid(row=0, column=4, padx=15, ipadx=10)
+        ttk.Button(btn_frame, text="Thêm", command=self.add_product).grid(row=0, column=1, padx=10, ipadx=10)
+        ttk.Button(btn_frame, text="Xóa", command=self.delete_product).grid(row=0, column=2, padx=10, ipadx=10)
+        ttk.Button(btn_frame, text="Cập nhật", command=self.update_product).grid(row=0, column=3, padx=10, ipadx=10)
+        ttk.Button(btn_frame, text="Làm mới", command=self.load_products).grid(row=0, column=4, padx=10, ipadx=10)
+        ttk.Button(btn_frame, text="Get API", command=self.get_api_products).grid(row=0, column=5, padx=10, ipadx=10)  # Nút mới
 
         self.load_products()
 
@@ -164,5 +180,24 @@ class AdminGUI:
         for i, key in enumerate(keys):
             self.entries[key].delete(0, tk.END)
             self.entries[key].insert(0, values[i])
+
+    def get_api_products(self):
+        # Lấy dữ liệu sản phẩm từ API và cập nhật bảng
+        try:
+            crawl_tiki.crawl_tiki_products()
+            self.file_manager.load_data()
+            self.load_products()
+            messagebox.showinfo("Thành công", "Đã lấy dữ liệu sản phẩm từ API!")
+        except Exception as e:
+            messagebox.showerror("Lỗi", f"Lấy dữ liệu API thất bại!\n{e}")
+
+    def logout_to_login(self):
+        # Đăng xuất về giao diện đăng nhập
+        self.root.destroy()
+        import tkinter as tk
+        from LoginGUI import LoginApp  # Import trong hàm để tránh vòng lặp import
+        root = tk.Tk()
+        LoginApp(root)
+        root.mainloop()
 
 

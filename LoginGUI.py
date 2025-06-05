@@ -3,6 +3,7 @@ from tkinter import messagebox, simpledialog, ttk
 from ClassUserManager import UserManager
 from AdminGUI import AdminGUI
 from UserGUI import UserGUI
+import os
 
 class LoginApp:
     # Giao diện đăng nhập, đăng ký, quên mật khẩu
@@ -61,17 +62,24 @@ class LoginApp:
         # Xử lý đăng nhập, mở giao diện theo vai trò
         username = self.entry_user.get().strip()
         password = self.entry_pass.get().strip()
+        # Nếu là admin đặc biệt
+        if username == "admin" and password == "admin":
+            self.root.destroy()
+            import tkinter as tk
+            from AdminGUI import AdminGUI
+            root_admin = tk.Tk()
+            AdminGUI(root_admin)
+            root_admin.mainloop()
+            return
+        # Còn lại kiểm tra file json như bình thường
         user = self.user_manager.authenticate(username, password)
         if user:
             self.root.destroy()
-            if user.role == "admin":
-                root_admin = tk.Tk()
-                AdminGUI(root_admin)
-                root_admin.mainloop()
-            else:
-                root = tk.Tk()
-                UserGUI(root)
-                root.mainloop()
+            import tkinter as tk
+            from UserGUI import UserGUI
+            root = tk.Tk()
+            UserGUI(root)
+            root.mainloop()
         else:
             messagebox.showerror("Lỗi", "Tài khoản hoặc mật khẩu sai!")
 
@@ -81,7 +89,7 @@ class LoginApp:
         self.root.iconbitmap("icon_ban_hang.ico")
         reg_win = tk.Toplevel(self.root)
         reg_win.title("Đăng ký tài khoản")
-        reg_win.geometry("320x320")
+        reg_win.geometry("320x270")
         reg_win.resizable(False, False)
         reg_win.configure(bg="white")
         reg_win.grab_set()
@@ -94,19 +102,21 @@ class LoginApp:
         tk.Label(reg_win, text="Mật khẩu", bg="white", anchor="w").pack(fill="x", padx=30)
         entry_pass = ttk.Entry(reg_win, show="*", font=("Arial", 11))
         entry_pass.pack(padx=30, pady=5, fill="x")
-        tk.Label(reg_win, text="Vai trò", bg="white", anchor="w").pack(fill="x", padx=30)
-        cb_role = ttk.Combobox(reg_win, values=["user", "admin"], state="readonly", font=("Arial", 11))
-        cb_role.set("user")
-        cb_role.pack(padx=30, pady=5, fill="x")
 
         def do_register():
-            # Xử lý đăng ký tài khoản mới
             username = entry_user.get().strip()
             password = entry_pass.get().strip()
-            role = cb_role.get()
+            role = "user"
             if not username or not password:
                 messagebox.showwarning("Lỗi", "Vui lòng nhập đầy đủ tài khoản và mật khẩu!", parent=reg_win)
                 return
+            if username == "admin":
+                messagebox.showerror("Lỗi", "Không thể đăng ký tài khoản admin!", parent=reg_win)
+                return
+            # Nếu chưa có file json thì tạo file mới
+            if not os.path.exists("users.json"):
+                with open("users.json", "w", encoding="utf8") as f:
+                    f.write("[]")
             if self.user_manager.get_user(username):
                 messagebox.showerror("Lỗi", "Tài khoản đã tồn tại!", parent=reg_win)
                 return
@@ -116,7 +126,6 @@ class LoginApp:
             self.root.deiconify()
 
         def on_close():
-            # Xử lý khi đóng cửa sổ đăng ký
             self.root.deiconify()
             reg_win.destroy()
 
