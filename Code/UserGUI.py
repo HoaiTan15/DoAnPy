@@ -22,13 +22,14 @@ def setup_style():
                     padding=6)
 
 class UserGUI:
-    def __init__(self, root):
+    def __init__(self, root, icon_path):
         # Khởi tạo giao diện người dùng, hiển thị sản phẩm và các chức năng mua hàng
         setup_style()
         self.root = root
+        self.icon_path = icon_path
         self.root.title("Danh sách sản phẩm (User)")
         self.root.geometry("900x520")
-        self.root.iconbitmap("icon_ban_hang.ico")
+        self.root.iconbitmap(self.icon_path)
         self.file_manager = File("products.json")
         self.cart = []  # Danh sách các sản phẩm trong giỏ hàng
 
@@ -61,7 +62,6 @@ class UserGUI:
         action_frame.grid_columnconfigure(2, weight=1)
         ttk.Button(btn_frame, text="Thêm vào giỏ", command=self.add_to_cart).pack(side=tk.LEFT, padx=10, ipadx=8)
         ttk.Button(btn_frame, text="Thanh toán", command=self.checkout).pack(side=tk.LEFT, padx=10, ipadx=8)
-        # ttk.Button(btn_frame, text="Thoát", command=self.root.quit).pack(side=tk.LEFT, padx=10, ipadx=8)  # XÓA DÒNG NÀY
         ttk.Button(btn_frame, text="Xem giỏ hàng", command=self.view_cart).pack(side=tk.LEFT, padx=10, ipadx=8)
 
         self.load_products()
@@ -72,7 +72,8 @@ class UserGUI:
         import tkinter as tk
         from LoginGUI import LoginApp  # Import ngay trong hàm để tránh vòng lặp import
         root = tk.Tk()
-        LoginApp(root)
+        LoginApp(root, self.icon_path)  # Truyền icon_path vào đây
+        root.iconbitmap(self.icon_path)
         root.mainloop()
 
     def load_products(self):

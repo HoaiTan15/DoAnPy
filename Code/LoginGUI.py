@@ -8,10 +8,11 @@ import os
 class LoginApp:
     # Giao diện đăng nhập, đăng ký, quên mật khẩu
 
-    def __init__(self, root):
+    def __init__(self, root, icon_path):
         # Khởi tạo giao diện và các thành phần
         self.root = root
-        self.root.iconbitmap("icon_ban_hang.ico")
+        self.icon_path = icon_path
+        self.root.iconbitmap(self.icon_path)
         self.root.title("Đăng nhập hệ thống")
         self.root.geometry("370x400")
         self.root.configure(bg="#f0f4f8")
@@ -68,7 +69,7 @@ class LoginApp:
             import tkinter as tk
             from AdminGUI import AdminGUI
             root_admin = tk.Tk()
-            AdminGUI(root_admin)
+            AdminGUI(root_admin, self.icon_path)  # TRUYỀN icon_path vào đây!
             root_admin.mainloop()
             return
         # Còn lại kiểm tra file json như bình thường
@@ -78,7 +79,8 @@ class LoginApp:
             import tkinter as tk
             from UserGUI import UserGUI
             root = tk.Tk()
-            UserGUI(root)
+            UserGUI(root, self.icon_path)  # SỬA LẠI: truyền icon_path vào đây!
+            root.iconbitmap(self.icon_path)
             root.mainloop()
         else:
             messagebox.showerror("Lỗi", "Tài khoản hoặc mật khẩu sai!")
@@ -86,14 +88,13 @@ class LoginApp:
     def register(self):
         # Hiển thị cửa sổ đăng ký tài khoản mới
         self.root.withdraw()
-        self.root.iconbitmap("icon_ban_hang.ico")
         reg_win = tk.Toplevel(self.root)
         reg_win.title("Đăng ký tài khoản")
         reg_win.geometry("320x270")
         reg_win.resizable(False, False)
         reg_win.configure(bg="white")
         reg_win.grab_set()
-        reg_win.iconbitmap("icon_ban_hang.ico")
+        reg_win.iconbitmap(self.icon_path)  # SỬA DÒNG NÀY
 
         tk.Label(reg_win, text="ĐĂNG KÝ", font=("Arial", 15, "bold"), bg="white", fg="#1976d2").pack(pady=(15, 10))
         tk.Label(reg_win, text="Tài khoản", bg="white", anchor="w").pack(fill="x", padx=30)
@@ -136,7 +137,7 @@ class LoginApp:
     def reset_password(self):
         # Xử lý chức năng quên mật khẩu
         self.root.withdraw()
-        username = self.custom_askstring("Quên mật khẩu", "Nhập tài khoản:", "icon_ban_hang.ico")
+        username = self.custom_askstring("Quên mật khẩu", "Nhập tài khoản:")
         if username is None:
             self.root.deiconify()
             return
@@ -147,18 +148,17 @@ class LoginApp:
             self.root.deiconify()
             return
 
-        new_pass = self.custom_askstring("Quên mật khẩu", "Nhập mật khẩu mới:", "icon_ban_hang.ico", show="*")
+        new_pass = self.custom_askstring("Quên mật khẩu", "Nhập mật khẩu mới:", show="*")
         if new_pass:
             user.password = new_pass
             self.user_manager.save_users()
             messagebox.showinfo("Thành công", "Mật khẩu đã được cập nhật.", parent=self.root)
         self.root.deiconify()
 
-    def custom_askstring(self, title, prompt, icon_path, show=None):
-        # Hộp thoại nhập custom với icon, tiêu đề, căn giữa
+    def custom_askstring(self, title, prompt, show=None):
         dialog = tk.Toplevel()
         dialog.title(title)
-        dialog.iconbitmap(icon_path)
+        dialog.iconbitmap(self.icon_path)  # SỬA DÒNG NÀY
         dialog.resizable(False, False)
         dialog.grab_set()
         dialog.geometry("320x140")
@@ -199,5 +199,5 @@ class LoginApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = LoginApp(root)
+    app = LoginApp(root, "icon_ban_hang.ico")
     root.mainloop()

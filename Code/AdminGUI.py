@@ -22,12 +22,13 @@ def setup_style():
                     padding=6)
 
 class AdminGUI:
-    def __init__(self, root=None):
+    def __init__(self, root=None, icon_path="icon_ban_hang.ico"):
         setup_style()
         if root is None:
             root = tk.Tk()
         self.root = root
-        self.root.iconbitmap("icon_ban_hang.ico")
+        self.icon_path = icon_path
+        self.root.iconbitmap(self.icon_path)
         self.root.title("Quản Lý Sản Phẩm Cửa Hàng (ADMIN)")
         self.root.geometry("950x700")
         self.file_manager = File("products.json")
@@ -143,17 +144,52 @@ class AdminGUI:
         messagebox.showinfo("Thành công", "Đã xóa sản phẩm!")
 
     def update_product(self):
-        # Cập nhật sản phẩm được chọn bằng dữ liệu mới từ form
+        # Hiện popup sửa sản phẩm khi nhấn nút "Cập nhật"
         selected = self.tree.focus()
         if not selected:
             messagebox.showwarning("Chưa chọn", "Vui lòng chọn sản phẩm để cập nhật!")
             return
-        data = self.get_entry_data()
-        if not data:
+        values = self.tree.item(selected, "values")
+        if not values:
             return
-        self.file_manager.update_product_in_file(**data)
-        self.load_products()
-        messagebox.showinfo("Thành công", "Đã cập nhật sản phẩm!")
+
+        popup = tk.Toplevel(self.root)
+        popup.title("Sửa sản phẩm")
+        popup.geometry("400x500")
+        popup.grab_set()
+        popup.iconbitmap(self.icon_path)
+
+        fields = ["ID", "Name", "Cost", "Description", "Quantity", "Catalogue"]
+        entries = {}
+
+        for i, field in enumerate(fields):
+            tk.Label(popup, text=field, font=("Segoe UI", 11)).pack(anchor="w", padx=20, pady=(10 if i==0 else 5, 0))
+            entry = tk.Entry(popup, font=("Segoe UI", 11))
+            entry.pack(fill="x", padx=20)
+            entry.insert(0, values[i])
+            if field == "ID":
+                entry.config(state="readonly")  # Không cho sửa ID
+            entries[field.lower()] = entry
+
+        def save_edit():
+            try:
+                new_data = {
+                    "new_id": entries["id"].get().strip(),
+                    "new_name": entries["name"].get().strip(),
+                    "new_cost": int(entries["cost"].get().strip()),
+                    "new_description": entries["description"].get().strip(),
+                    "new_quantity": int(entries["quantity"].get().strip()),
+                    "new_catalogue": entries["catalogue"].get().strip()
+                }
+            except ValueError:
+                messagebox.showerror("Lỗi nhập liệu", "Giá và Số lượng phải là số!", parent=popup)
+                return
+            self.file_manager.update_product_in_file(**new_data)
+            self.load_products()
+            popup.destroy()
+            messagebox.showinfo("Thành công", "Đã cập nhật sản phẩm!", parent=self.root)
+
+        ttk.Button(popup, text="Cập nhật", command=save_edit).pack(pady=20, padx=20, fill="x", ipady=6)
 
     def get_entry_data(self):
         # Lấy dữ liệu từ form, trả về dict hoặc None nếu nhập sai
@@ -197,7 +233,8 @@ class AdminGUI:
         import tkinter as tk
         from LoginGUI import LoginApp  # Import trong hàm để tránh vòng lặp import
         root = tk.Tk()
-        LoginApp(root)
+        LoginApp(root, self.icon_path)  # TRUYỀN icon_path vào đây!
+        root.iconbitmap(self.icon_path)
         root.mainloop()
 
 
