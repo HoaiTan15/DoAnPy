@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from ClassFile import File
 from ClassProduct import Product
-import crawl_tiki  # Thêm dòng này để import hàm crawl_tiki_products
+import crawl_tiki
 
 def setup_style():
     style = ttk.Style()
@@ -79,7 +79,7 @@ class AdminGUI:
             entry = tk.Entry(form_btn_frame, width=15, font=("Segoe UI", 11))
             entry.grid(row=1, column=i, padx=5, pady=2, sticky="ew")
             self.entries[label.lower()] = entry
-            form_btn_frame.grid_columnconfigure(i, weight=1)  # Cho phép các cột co giãn đều
+            form_btn_frame.grid_columnconfigure(i, weight=1)
 
         # Căn giữa 5 nút chức năng (thêm nút Get API)
         btn_frame = tk.Frame(form_btn_frame, bg="white")
