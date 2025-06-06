@@ -12,9 +12,9 @@ if __name__ == "__main__":
         main_cli()                            # Chạy chương trình CLI
     else:
         # Nếu enable_cli = False, chạy giao diện đồ họa (GUI)
-        root = Tk()                           # Tạo cửa sổ Tkinter
-        app = LoginApp(root)                  # Khởi tạo giao diện đăng nhập
-        root.iconbitmap("icon_ban_hang.ico")  # Đặt icon cho cửa sổ
-        root.mainloop()                       # Bắt đầu vòng lặp giao diện
+        root = Tk()                           
+        app = LoginApp(root)                 
+        root.iconbitmap("icon_ban_hang.ico")  
+        root.mainloop()                       
 
 # pyinstaller --onefile --windowed --icon=icon_ban_hang.ico main.py

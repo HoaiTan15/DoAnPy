@@ -91,7 +91,7 @@ class AdminGUI:
         ttk.Button(btn_frame, text="Xóa", command=self.delete_product).grid(row=0, column=2, padx=10, ipadx=10)
         ttk.Button(btn_frame, text="Cập nhật", command=self.update_product).grid(row=0, column=3, padx=10, ipadx=10)
         ttk.Button(btn_frame, text="Làm mới", command=self.load_products).grid(row=0, column=4, padx=10, ipadx=10)
-        ttk.Button(btn_frame, text="Get API", command=self.get_api_products).grid(row=0, column=5, padx=10, ipadx=10)  # Nút mới
+        ttk.Button(btn_frame, text="Get API", command=self.get_api_products).grid(row=0, column=5, padx=10, ipadx=10)
 
         self.load_products()
 
